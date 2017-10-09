@@ -18,7 +18,7 @@ public class database_Main {
 	
 	static InformationMeasure InfoM = new InformationMeasure();
 	 
-	static double EntropyOfEdu;
+	static double EntropyOfGen;
 	
 	public static void main(String args[]) throws FileNotFoundException
 	{
@@ -79,18 +79,20 @@ public class database_Main {
 			{
 				count = 0;
 				for(int i = 0;i<291;i++)
-					if(Integer.toString(newPerson[i].getGender()).equals(a)) count++;
+					if(Integer.toString(newPerson[i].getGender()).equals(a))
+						count++;
 				
 				count_Gen[count_Gen_Count++] = count;
 				gen.add(a);
-				System.out.println(a + " - " + count);
+				//System.out.println(a + " - " + count);
 			}//if gen
 
 			if(!hel.contains(b)){
 				count = 0;
-				for(int i = 0;i<291;i++){
-					if(Integer.toString(newPerson[i].getOverallHealth()).equals(b)) count++;
-				}
+				for(int i = 0;i<291;i++)
+					if(Integer.toString(newPerson[i].getOverallHealth()).equals(b)) 
+						count++;
+				
 				count_Hel[count_Hel_Count++] = count;
 				hel.add(b);
 			//	System.out.println(b + " - " + count);
@@ -99,9 +101,10 @@ public class database_Main {
 
 			if(!sty.contains(c)){
 				count = 0;
-				for(int i = 0;i<291;i++){
-					if(Integer.toString(newPerson[i].gethoursStudy()).equals(c)) count++;
-				}
+				for(int i = 0;i<291;i++)
+					if(Integer.toString(newPerson[i].gethoursStudy()).equals(c)) 
+						count++;
+				
 				count_Sty[count_Sty_Count++] = count;
 				sty.add(c);
 				//System.out.println(c + " - " + count);
@@ -111,29 +114,36 @@ public class database_Main {
 		for(int i = 0; i < count_Edu.length; i++)
 			total += count_Edu[i];
 			
-		//Sigma
+		//Entropy for gender
 		for(int i = 0; i < count_Gen.length; i++)
-			InfoMeasure(count_Inc.length, count_Gen[i], total);
+			EntropyOfGen += (InfoMeasure(count_Inc.length, count_Gen[i], total) * probability(count_Gen[i], total));
+		
+	
+		System.out.println(EntropyOfGen);
+		
 		
 		scn.close();
 	}
 	
 	//probability 
-	public static double probability(int x, int tot)
+	public static double probability(int frequency, int tot)
 	{
-		double f = x;
+		double f = frequency;
 		double t = tot;
 		
 		return f/t;
 	}
 	
 	//Log base 2 function
-	public static double log2(double p) { return Math.log10(p)/Math.log10(2); }
+	public static double log2(double p) { return Math.log(p)/Math.log(2); }
 	
-	public static void InfoMeasure(int s, int f, int t) {
+	public static double InfoMeasure(int s, int f, int t) 
+	{
 		InfoM.setSum(s);
 		InfoM.setFrequency(f);
 		InfoM.setTotal(t);
+		
+		return InfoM.I();
 	}
 	
 }

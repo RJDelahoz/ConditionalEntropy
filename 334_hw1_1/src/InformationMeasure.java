@@ -23,22 +23,17 @@ public class InformationMeasure
 	public int getTotal() { return total; }
 	
 	public double I () {
-		double  result = 0; 
-		for(int i = 0; i < this.getSum(); i++)
-		{
-		
-		}
-		return result;
+		double p = probability(freq);
+		return -(p*log2(p));
 	}
 	
-	public double I_total(){
-		return 0;
-	}
-	/*
-	public double log2(double x)
+	
+	public double log2(double x){ return Math.log(x)/Math.log(2.0);	}
+	
+	public double probability(int frequency) 
 	{
+		double f = frequency;
 		
-		TODO - write log2 
+		return 1/f; 
 	}
-	**/
 }
