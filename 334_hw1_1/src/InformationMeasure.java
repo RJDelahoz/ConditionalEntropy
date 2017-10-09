@@ -30,6 +30,7 @@ public class InformationMeasure
 	
 	public double log2(double x){ return Math.log(x)/Math.log(2.0);	}
 	
+	//Pr(Income| Q = X(?))
 	public double probability(int frequency) 
 	{
 		double f = frequency;

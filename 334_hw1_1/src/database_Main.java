@@ -19,6 +19,9 @@ public class database_Main {
 	static InformationMeasure InfoM = new InformationMeasure();
 	 
 	static double EntropyOfGen;
+	static double EntropyOfEdu;
+	static double EntropyOfHel;
+	static double EntropyOfSty;
 	
 	public static void main(String args[]) throws FileNotFoundException
 	{
@@ -84,7 +87,7 @@ public class database_Main {
 				
 				count_Gen[count_Gen_Count++] = count;
 				gen.add(a);
-				//System.out.println(a + " - " + count);
+			//	System.out.println(a + " - " + count);
 			}//if gen
 
 			if(!hel.contains(b)){
@@ -117,15 +120,19 @@ public class database_Main {
 		//Entropy for gender
 		for(int i = 0; i < count_Gen.length; i++)
 			EntropyOfGen += (InfoMeasure(count_Inc.length, count_Gen[i], total) * probability(count_Gen[i], total));
+		System.out.println("Conditional Entropy: "+ EntropyOfGen);
 		
-	
-		System.out.println(EntropyOfGen);
+		//Entropy for Education
+		for(int i = 0; i < count_Edu.length; i++)
+			EntropyOfEdu += (InfoMeasure(count_Inc.length, count_Edu[i], total) * probability(count_Edu[i], total));
+		System.out.println("Conditional Entropy: "+ EntropyOfEdu);
+		
 		
 		
 		scn.close();
 	}
 	
-	//probability 
+	//Pr(Q)
 	public static double probability(int frequency, int tot)
 	{
 		double f = frequency;
@@ -133,15 +140,14 @@ public class database_Main {
 		
 		return f/t;
 	}
-	
-	//Log base 2 function
-	public static double log2(double p) { return Math.log(p)/Math.log(2); }
-	
+
 	public static double InfoMeasure(int s, int f, int t) 
 	{
 		InfoM.setSum(s);
 		InfoM.setFrequency(f);
 		InfoM.setTotal(t);
+		
+		System.out.println(InfoM.I());
 		
 		return InfoM.I();
 	}
