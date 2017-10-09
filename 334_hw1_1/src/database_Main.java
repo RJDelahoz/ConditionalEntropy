@@ -34,6 +34,8 @@ public class database_Main {
 		while(scn.hasNext())
 			newPerson[count++] = new People(scn.nextInt(), scn.nextInt(), scn.nextInt(), scn.nextInt(), scn.nextInt());
 
+		scn.close();
+		
 		ArrayList<String> edu = new ArrayList<String>();
 		ArrayList<String> gen = new ArrayList<String>();
 		ArrayList<String> hel = new ArrayList<String>();
@@ -120,16 +122,24 @@ public class database_Main {
 		//Entropy for gender
 		for(int i = 0; i < count_Gen.length; i++)
 			EntropyOfGen += (InfoMeasure(count_Inc.length, count_Gen[i], total) * probability(count_Gen[i], total));
-		System.out.println("Conditional Entropy: "+ EntropyOfGen);
+		System.out.println("Conditional Entropy for gender: "+ EntropyOfGen  + "\n--------------------");
 		
 		//Entropy for Education
 		for(int i = 0; i < count_Edu.length; i++)
 			EntropyOfEdu += (InfoMeasure(count_Inc.length, count_Edu[i], total) * probability(count_Edu[i], total));
-		System.out.println("Conditional Entropy: "+ EntropyOfEdu);
+		System.out.println("Conditional Entropy for education: "+ EntropyOfEdu + "\n--------------------");
+		
+		//Entropy for Overall health
+		for(int i = 0; i < count_Hel.length; i++)
+			EntropyOfHel += (InfoMeasure(count_Inc.length, count_Hel[i], total) * probability(count_Hel[i], total));
+		System.out.println("Conditional Entropy for overall health: "+ EntropyOfHel + "\n--------------------");
+		
+		//Entropy for Work/Study hours
+		for(int i = 0; i < count_Sty.length; i++)
+			EntropyOfSty += (InfoMeasure(count_Inc.length, count_Sty[i], total) * probability(count_Sty[i], total));
+		System.out.println("Conditional Entropy for work/study hours: "+ EntropyOfSty);
 		
 		
-		
-		scn.close();
 	}
 	
 	//Pr(Q)
@@ -147,7 +157,7 @@ public class database_Main {
 		InfoM.setFrequency(f);
 		InfoM.setTotal(t);
 		
-		System.out.println(InfoM.I());
+		System.out.println(f + "\t--\t" + InfoM.I());
 		
 		return InfoM.I();
 	}
