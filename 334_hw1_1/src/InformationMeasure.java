@@ -7,18 +7,18 @@ public class InformationMeasure
 	
 	public InformationMeasure()
 	{	}
-	public InformationMeasure (int sum, int freq, int total) {
-		setSum(sum);
+	public InformationMeasure (int freq, int total) {
+	//	setSum(sum);
 		setFrequency(freq);
 		setTotal(total);
 	}
 	//setter methods
-	public void setSum(int s) 	{ this.sum = s;	}
+	//public void setSum(int s) 	{ this.sum = s;	}
 	public void setFrequency(int f) { this.freq = f;	}
 	public void setTotal(int t) { this.total = t; }
 	
 	//getters Methods
-	public int getSum() { return sum; }
+	//public int getSum() { return sum; }
 	public int getFrequency() { return freq; }
 	public int getTotal() { return total; }
 	
@@ -35,6 +35,6 @@ public class InformationMeasure
 	{
 		double f = frequency;
 		
-		return 1/f; 
+		return f/total; 
 	}
 }
